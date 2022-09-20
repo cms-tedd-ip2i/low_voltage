@@ -41,7 +41,6 @@ jobs:
         ls
         echo $HOME
         docker-compose up -d 
-        cd -
-    #- name: Run black --check .
-    #  run: black --check . --exclude _actions
+        docker-compose ps -a
+    
     
