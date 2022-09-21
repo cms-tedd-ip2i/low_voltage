@@ -2,10 +2,10 @@ name: Docker-Image-Build-Publish
 on:
   push:
     branches:
-      - 'main'
+      #- 'main'
       - 'dev'
-    tags:
-      - 'v*'
+    #tags:
+    #  - 'v*'
 
 env:
   REGISTRY: ghcr.io
