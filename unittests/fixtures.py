@@ -1,5 +1,4 @@
 import pytest
-from fixtures import env
 
 
 @pytest.fixture
