@@ -1,5 +1,5 @@
-FROM  centos:centos7
-#FROM  --platform=linux/amd64 centos:centos7 
+#FROM  centos:centos7
+FROM  --platform=linux/amd64 centos:centos7 
 
 WORKDIR /usr/app
 
@@ -35,9 +35,6 @@ RUN yum install -y libusb && \
     touch /tmp/smap_install_ni_anyway && \
     yum install -y ni-daqmx && \
     yum install -y kernel-devel
-
-#COPY requirements.txt ./
-#RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
 COPY requirements ./requirements
 RUN python3 -m pip install --no-cache-dir -r requirements/docker.txt
