@@ -4,8 +4,8 @@
 name: Python package
 
 on:
-  push:
-    branches: [ dev ]
+  pull_request:
+    branches: [ main, dev ]
 
 jobs:
   build:
@@ -51,7 +51,7 @@ jobs:
         python3 -m pip install pytest-cov
         python3 -m pytest --cov=../ --cov-report=xml
         ls
-    - name: Upload coverage to Codecov
+   - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
         directory: ./unittests
