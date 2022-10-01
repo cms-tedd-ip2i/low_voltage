@@ -17,8 +17,12 @@ class Channel(object):
 
 
 class HMP(object):
-    rm = visa.ResourceManager("/usr/lib64/librsvisa.so@ivi") # use the default backend(NI) visa shared library.
-    HMP4040 = rm.open_resource("TCPIP::192.168.1.202::10002::SOCKET") # connect to R&S HMP4040 device via TCPIP
+    rm = visa.ResourceManager(
+        "/usr/lib64/librsvisa.so@ivi"
+    )  # use the default backend(NI) visa shared library.
+    HMP4040 = rm.open_resource(
+        "TCPIP::192.168.1.202::10002::SOCKET"
+    )  # connect to R&S HMP4040 device via TCPIP
     num_of_channels = 5
 
     def __init__(self, name: str, n_channels: int = 5):
@@ -26,14 +30,18 @@ class HMP(object):
         self.name = name
         self.num_of_channels = n_channels
 
-        self.HMP4040.read_termination = "\n" 
+        self.HMP4040.read_termination = "\n"
         self.HMP4040.write_termination = "\n"
         self.HMP4040.write("*IDN?")  # check the instrument identification.
         idn = self.HMP4040.read()
         print("IDN:", idn)
         # need to enable the VI_ATTR_TERMCHAR_EN = 1 (and/or VI_ATTR_SUPPRESS_END_EN=0) to see a quick response.
-        self.HMP4040.set_visa_attribute(visa.constants.VI_ATTR_TERMCHAR_EN, True)  # Set the state of an attribute.
-        attr = self.HMP4040.get_visa_attribute(visa.constants.VI_ATTR_TERMCHAR_EN) # Retrieves the state of an attribute in this resource.
+        self.HMP4040.set_visa_attribute(
+            visa.constants.VI_ATTR_TERMCHAR_EN, True
+        )  # Set the state of an attribute.
+        attr = self.HMP4040.get_visa_attribute(
+            visa.constants.VI_ATTR_TERMCHAR_EN
+        )  # Retrieves the state of an attribute in this resource.
         print("Attrib. TERMCHAR_EN:", attr)
         self.HMP4040.set_visa_attribute(visa.constants.VI_ATTR_SUPPRESS_END_EN, False)
         attr = self.HMP4040.get_visa_attribute(visa.constants.VI_ATTR_SUPPRESS_END_EN)
@@ -67,7 +75,7 @@ class HMP(object):
             else:
                 msg = "can only switch on or off"
                 raise ValueError(msg)
-            #OUTPut commands for activating the output channels. 
+            # OUTPut commands for activating the output channels.
             cmd = "OUTP " + str(int(lv_channel_state))
             print(
                 f"CMD for activating the output of the selected channel on LV : {cmd}"
@@ -85,7 +93,7 @@ class HMP(object):
             Channel_hmp = self.HMP4040.read()
             print("Channel  :  ", Channel_hmp)
             # print(message)
-            #VOLTage: Configuring the output voltage
+            # VOLTage: Configuring the output voltage
             cmd = "VOLT " + str(float(message))
             print(f"CMD to set the Voltage for selected channel in LV: {cmd}")
             self.HMP4040.write(cmd)
@@ -100,7 +108,7 @@ class HMP(object):
     def status(self):
         """TODO: Write unittest"""
         print("!!--------------------------------------------!!")
-        #loop on each channel and read/write volt/curr/status of them
+        # loop on each channel and read/write volt/curr/status of them
         for ch in range(self.num_of_channels - 1):
 
             var1 = "INST:NSEL "
