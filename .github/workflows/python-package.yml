@@ -32,7 +32,7 @@ jobs:
       run: |
         python3 -m pip install -r requirements/local.txt
         python3 -m pip install -e .
-        python3 -m install pytest-cov==4.1.0
+        python3 -m pip install pytest-cov==4.1.0
     - name: Docker-compose start mqtt and low_voltage
       run: | 
         cd docker/tedd_low_voltage
