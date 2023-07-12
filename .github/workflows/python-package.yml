@@ -4,8 +4,8 @@
 name: Python package
 
 on:
-  pull_request:
-    branches: [ main, dev ]
+  push:
+    branches: [ main]
 
 jobs:
   build:
@@ -32,7 +32,11 @@ jobs:
       run: |
         python3 -m pip install -r requirements/local.txt
         python3 -m pip install -e .
-    
+    - name: Print Python environment
+      run: |
+        python3 --version
+        python3 -m pip list
+
     - name: Docker-compose start mqtt and low_voltage
       run: | 
         cd docker/tedd_low_voltage
