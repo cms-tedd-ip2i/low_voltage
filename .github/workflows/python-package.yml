@@ -4,8 +4,8 @@
 name: Python package
 
 on:
-  push:
-    branches: [ main]
+  pull_request:
+    branches: [ main, dev ]
 
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
       run: |
         python3 -m pip install -r requirements/local.txt
         python3 -m pip install -e .
-        python3 -m pip install pytest-cov==4.1.0
+    
     - name: Docker-compose start mqtt and low_voltage
       run: | 
         cd docker/tedd_low_voltage
@@ -45,8 +45,6 @@ jobs:
         cd - 
     - name: Run black --check .
       run: black --check . --exclude _actions
-    - name: Print installed dependencies
-      run: python3 -m pip freeze
     - name: Test with pytest
       run: |
         cd unittests
