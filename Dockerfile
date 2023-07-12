@@ -39,6 +39,3 @@ RUN yum install -y libusb && \
 COPY requirements ./requirements
 RUN python3 -m pip install --no-cache-dir -r requirements/docker.txt
 
-#COPY setup.py .
-#RUN python3 -m pip install -e .
-
