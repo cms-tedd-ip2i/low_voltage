@@ -21,7 +21,7 @@ class HMP(object):
         "/usr/lib64/librsvisa.so@ivi"
     )  # use the default backend(NI) visa shared library.
     HMP4040 = rm.open_resource(
-        "TCPIP::192.168.1.202::10002::SOCKET"
+        "TCPIP::192.168.1.202::5025::SOCKET"
     )  # connect to R&S HMP4040 device via TCPIP
     num_of_channels = 5
 
