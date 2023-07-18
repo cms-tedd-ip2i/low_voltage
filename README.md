@@ -17,10 +17,10 @@ python3 -m pip install -e .
 To create centos:low_votage image with necessary packages.
 
 ```
-docker build -t low_voltage:centos .
+docker build -t centos:tedd_dcs_low_voltage .
 ```
 
-## Docker stack
+## Docker compose
 To  start the mqtt broker
 
 ```
