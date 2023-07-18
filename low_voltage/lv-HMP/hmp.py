@@ -2,6 +2,7 @@ import paho.mqtt.client as mqtt
 from dataclasses import dataclass
 import time
 import json
+import os
 
 # import visa
 import pyvisa as visa
@@ -20,9 +21,13 @@ class HMP(object):
     rm = visa.ResourceManager(
         "/usr/lib64/librsvisa.so@ivi"
     )  # use the default backend(NI) visa shared library.
-    HMP4040 = rm.open_resource(
-        "TCPIP::192.168.1.202::5025::SOCKET"
-    )  # connect to R&S HMP4040 device via TCPIP
+    ip = os.getenv("LOW_VOLTAGE_IP", default="127.1.1.1") # read ip from env file 
+    port = os.getenv("LOW_VOLTAGE_PORT", default="1000") # read port from env file
+    # connection_HMP4040 = "TCPIP::{}::{}::SOCKET".format(ip, port)
+    connection_HMP4040 = f"TCPIP::{ip}::{port}::SOCKET"
+    print("Connection HMP4040 :", connection_HMP4040)
+    HMP4040 = rm.open_resource(connection_HMP4040) # connect to R&S HMP4040 device
+
     num_of_channels = 5
 
     def __init__(self, name: str, n_channels: int = 5):
