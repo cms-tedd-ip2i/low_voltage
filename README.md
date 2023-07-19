@@ -20,7 +20,7 @@ To create centos:low_votage image with necessary packages.
 docker build -t low_voltage:centos .
 ```
 
-## Docker stack
+## Docker compose
 To  start the mqtt broker
 
 ```

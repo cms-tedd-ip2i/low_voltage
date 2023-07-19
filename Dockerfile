@@ -5,7 +5,7 @@ WORKDIR /usr/app
 
 RUN yum update -y && \
     yum install -y python3 && \
-    python3 -m pip install --upgrade && \
+    python3 -m pip install --upgrade pip && \
     python3 -m pip install -U PyVISA-py PyVISA
 
 
