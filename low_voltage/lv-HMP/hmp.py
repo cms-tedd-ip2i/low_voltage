@@ -21,6 +21,7 @@ class HMP(object):
     rm = visa.ResourceManager(
         "/usr/lib64/librsvisa.so@ivi"
     )  # use the default backend(NI) visa shared library.
+
     ip = os.getenv("LOW_VOLTAGE_IP", default="127.1.1.1")  # read ip from env file
     port = os.getenv("LOW_VOLTAGE_PORT", default="1000")  # read port from env file
     # connection_HMP4040 = "TCPIP::{}::{}::SOCKET".format(ip, port)

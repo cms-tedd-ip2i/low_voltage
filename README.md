@@ -17,7 +17,7 @@ python3 -m pip install -e .
 To create centos:low_votage image with necessary packages.
 
 ```
-docker build -t centos:tedd_dcs_low_voltage .
+docker build -t low_voltage:centos .
 ```
 
 ## Docker compose
